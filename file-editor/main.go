@@ -204,16 +204,16 @@ USAGE:
     file-editor <filename>
 
 COMMANDS:
-    display, d                    - Display file contents
-    insert <line> <text>         - Insert text at line number
-    delete <line>                - Delete line number
-    replace <line> <text>        - Replace line with text
-    append <text>                - Append text to end of file
-    search <pattern>             - Search for regex pattern
-    substitute <pattern> <repl>  - Replace first match of pattern
-    global <pattern> <repl>      - Replace all matches of pattern
-    copy <start> <end>           - Copy lines to clipboard
-    paste <line>                 - Paste clipboard at line
+    display, d                   - Display file contents
+    insert, i <line> <text>      - Insert text at line number
+    delete, dd <line>            - Delete line number
+    replace, r <line> <text>     - Replace line with text
+    append, a <text>             - Append text to end of file
+    search, s <pattern>          - Search for regex pattern
+    substitute, sub <pat> <repl> - Replace first match of pattern
+    global, g <pattern> <repl>   - Replace all matches of pattern
+    copy, c <start> <end>        - Copy lines to clipboard
+    paste, p <line>              - Paste clipboard at line
     save, w                      - Save file
     quit, q                      - Quit (warns if unsaved)
     help, h                      - Show this help
@@ -263,7 +263,7 @@ func main() {
 		case "display", "d":
 			editor.display()
 
-		case "insert":
+		case "insert", "i":
 			if len(parts) < 3 {
 				fmt.Println("ERROR: Usage: insert <line> <text>")
 				continue
@@ -278,7 +278,7 @@ func main() {
 				fmt.Printf("ERROR: %v\n", err)
 			}
 
-		case "delete":
+		case "delete", "dd":
 			if len(parts) != 2 {
 				fmt.Println("ERROR: Usage: delete <line>")
 				continue
@@ -292,7 +292,7 @@ func main() {
 				fmt.Printf("ERROR: %v\n", err)
 			}
 
-		case "replace":
+		case "replace", "r":
 			if len(parts) < 3 {
 				fmt.Println("ERROR: Usage: replace <line> <text>")
 				continue
@@ -307,7 +307,7 @@ func main() {
 				fmt.Printf("ERROR: %v\n", err)
 			}
 
-		case "append":
+		case "append", "a":
 			if len(parts) < 2 {
 				fmt.Println("ERROR: Usage: append <text>")
 				continue
@@ -315,7 +315,7 @@ func main() {
 			text := strings.Join(parts[1:], " ")
 			editor.appendLine(text)
 
-		case "search":
+		case "search", "s":
 			if len(parts) != 2 {
 				fmt.Println("ERROR: Usage: search <pattern>")
 				continue
@@ -331,7 +331,7 @@ func main() {
 				fmt.Printf("Found matches at lines: %v\n", matches)
 			}
 
-		case "substitute":
+		case "substitute", "sub":
 			if len(parts) != 3 {
 				fmt.Println("ERROR: Usage: substitute <pattern> <replacement>")
 				continue
@@ -340,7 +340,7 @@ func main() {
 				fmt.Printf("ERROR: %v\n", err)
 			}
 
-		case "global":
+		case "global", "g":
 			if len(parts) != 3 {
 				fmt.Println("ERROR: Usage: global <pattern> <replacement>")
 				continue
@@ -349,7 +349,7 @@ func main() {
 				fmt.Printf("ERROR: %v\n", err)
 			}
 
-		case "copy":
+		case "copy", "c":
 			if len(parts) != 3 {
 				fmt.Println("ERROR: Usage: copy <start> <end>")
 				continue
@@ -367,7 +367,7 @@ func main() {
 				clipboard = copied
 			}
 
-		case "paste":
+		case "paste", "p":
 			if len(parts) != 2 {
 				fmt.Println("ERROR: Usage: paste <line>")
 				continue
