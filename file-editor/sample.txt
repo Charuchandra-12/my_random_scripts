@@ -1,0 +1,10 @@
+Welcome to the File Editor Test
+This is line 2 with some content
+TODO: Fix this bug in the code
+Another line with text
+func main() {
+    fmt.Println("Hello World")
+}
+This line contains OLD text that needs updating
+Final line of the test file
+
